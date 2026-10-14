@@ -1,0 +1,31 @@
+# Secrets and local environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python virtual environments and caches
+.venv/
+venv/
+mcp_server/.venv/
+__pycache__/
+*.py[cod]
+
+# Frontend dependencies and build output
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+*.local
+
+# Generated and temporary files
+*.db.tmp
+*.db-journal
+*.log
+data.zip
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/

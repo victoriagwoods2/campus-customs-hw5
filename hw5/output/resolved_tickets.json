@@ -1,0 +1,243 @@
+{
+  "generated_from": [
+    "output/audit_trail.json",
+    "data/campus_customs_new.db"
+  ],
+  "model": "gpt-6-luna",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 160.0,
+  "tickets": [
+    {
+      "id": 101,
+      "final_status": "resolved",
+      "run_id": "aa3854d2-7272-4920-adfa-08ea30f66eb1",
+      "agent_run_status": "needs_human_approval",
+      "outcome": "Size S tee is out of stock (0 on hand); the only apparel vendor, Bulldog Print Co, was blocked by overdue invoice 501. Accounting requested the $840.00 invoice payment, a human approved it, and invoice 501 is now paid. Customer Service saved an unsent update to the customer. No restock purchase order was created in this run.",
+      "boss_summary": "Started with Inventory because this is an out-of-stock apparel order and the immediate question is whether it can be sourced. The ticket requests one CC-TEE-WHITE size S; stock is 0. Inventory confirmed other sizes do not meet the request, and the only listed apparel reprint vendor, Bulldog Print Co, is blocked by overdue invoice 501. Through Inventory's handoff, Accounting submitted payment approval request #1 for $840; it is pending, not paid. Cash is $3,400 with $840 reserved, leaving $2,560 available after pending requests, so the requested amount is within current funds but still requires human approval. No restock order or supplier commitment is confirmed. Customer Service saved an unsent update draft. Keep the order unresolved pending approval and supplier confirmation; do not promise a date.",
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_to": [
+            "Inventory",
+            "Customer Service"
+          ],
+          "mcp_tools": [
+            "get_ticket_context",
+            "get_pending_approvals",
+            "get_cash_status"
+          ],
+          "summary": "Started with Inventory because this is an out-of-stock apparel order and the immediate question is whether it can be sourced. The ticket requests one CC-TEE-WHITE size S; stock is 0. Inventory confirmed other sizes do not meet the request, and the only listed apparel reprint vendor, Bulldog Print Co, is blocked by overdue invoice 501. Through Inventory's handoff, Accounting submitted payment approval request #1 for $840; it is pending, not paid. Cash is $3,400 with $840 reserved, leaving $2,560 available after pending requests, so the requested amount is within current funds but still requires human approval. No restock order or supplier commitment is confirmed. Customer Service saved an unsent update draft. Keep the order unresolved pending approval and supplier confirmation; do not promise a date."
+        },
+        {
+          "agent": "Inventory",
+          "delegated_to": [
+            "Accounting"
+          ],
+          "mcp_tools": [
+            "get_ticket_101_stock_and_vendor_status",
+            "lookup_inventory",
+            "list_vendors",
+            "get_pending_approvals"
+          ],
+          "summary": "Size S is unavailable: CC-TEE-WHITE has 0 on hand against a requested quantity of 1. No order was initiated. The listed candidate vendor cannot ship while its invoice is unpaid; invoice payment approval is pending."
+        },
+        {
+          "agent": "Accounting",
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket_101_stock_and_vendor_status",
+            "get_cash_status",
+            "request_payment_approval"
+          ],
+          "summary": "Payment request for overdue invoice 501 ($840) is viable within available checking cash. Submitted request #1 for human approval; no payment was made. Vendor remains blocked from shipping until payment is approved and recorded."
+        },
+        {
+          "agent": "Customer Service",
+          "delegated_to": [
+            "Inventory"
+          ],
+          "mcp_tools": [
+            "get_ticket_101_stock_and_vendor_status",
+            "get_ticket_context",
+            "save_customer_message_draft"
+          ],
+          "summary": "Saved an unsent customer update to the operations board (draft 1). It states size S is unavailable, replenishment is still being checked and depends on approval and supplier confirmation, and no restock date or completed order is being promised. Recommended next step: ask whether the customer wants us to continue checking replenishment or discuss another option."
+        }
+      ],
+      "agents_not_involved": [
+        "Facilities"
+      ],
+      "human_approvals": [
+        {
+          "request_id": 1,
+          "type": "payment",
+          "amount": 840.0,
+          "prepared_by": "Accounting",
+          "decision": "approved",
+          "decided_by": "V. Woods",
+          "decided_via": "React dashboard → POST /api/approvals/{id}/approve",
+          "payment_id": 1,
+          "payment_kind": "invoice"
+        }
+      ],
+      "customer_draft": {
+        "draft_id": 1,
+        "status": "draft",
+        "sent": false,
+        "text": "Hi Tauhid, thanks for your request for a Bulldog tee in size S. Size S is currently unavailable. We’re checking whether replenishment can be arranged, but it depends on the required approval and confirmation that a supplier can fulfill it. No replenishment order has been placed, and we can’t confirm a restock date yet. Please let us know whether you’d like us to continue checking replenishment or discuss another option."
+      },
+      "cash_change": -840.0,
+      "unresolved_questions": [
+        "Will payment approval request #1 be approved and recorded?",
+        "After any payment is recorded, will Bulldog Print Co confirm a one-unit size-S order and timing?",
+        "Can another eligible supplier be verified, or what alternative would the customer accept?"
+      ],
+      "usage": {
+        "requests": 19,
+        "tool_calls": 23,
+        "input_tokens": 35991,
+        "output_tokens": 5403,
+        "delegations": 4,
+        "elapsed_seconds": 102.22
+      }
+    },
+    {
+      "id": 102,
+      "final_status": "resolved",
+      "run_id": "9fc64d79-da89-4bd0-a878-cafb09fcc524",
+      "agent_run_status": "needs_human_approval",
+      "outcome": "Rent of $2,400.00 for the Chapel Street shop (due 2026-09-02, not overdue) was verified by Facilities, requested by Accounting, and approved by a human. The payment is recorded and the lease's next due date is now 2026-10-02.",
+      "boss_summary": "Started with Facilities because ticket 102 concerns shop rent and lease operations. Facilities verified the rent details and coordinated with Accounting, which created payment approval request #2. Recommend human review and approval of the $2,400 rent payment before its 2026-09-02 due date. The payment has not been made.",
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_to": [
+            "Facilities"
+          ],
+          "mcp_tools": [
+            "get_ticket_context",
+            "get_ticket_102_lease_and_rent_due_date",
+            "get_cash_status",
+            "get_pending_approvals"
+          ],
+          "summary": "Started with Facilities because ticket 102 concerns shop rent and lease operations. Facilities verified the rent details and coordinated with Accounting, which created payment approval request #2. Recommend human review and approval of the $2,400 rent payment before its 2026-09-02 due date. The payment has not been made."
+        },
+        {
+          "agent": "Facilities",
+          "delegated_to": [
+            "Accounting"
+          ],
+          "mcp_tools": [
+            "get_ticket_102_lease_and_rent_due_date"
+          ],
+          "summary": "The $2,400 rent for the Chapel Street shop is due 2026-09-02, two days after the verified shop date of 2026-08-31, so it is not overdue. Accounting confirmed sufficient cash and created payment approval request #2. Payment has not been made; human approval is required."
+        },
+        {
+          "agent": "Accounting",
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_cash_status",
+            "get_ticket_102_lease_and_rent_due_date",
+            "request_payment_approval"
+          ],
+          "summary": "Sufficient available cash to prepare rent request. A $2,400 rent payment request is pending human approval; no payment was made."
+        }
+      ],
+      "agents_not_involved": [
+        "Inventory",
+        "Customer Service"
+      ],
+      "human_approvals": [
+        {
+          "request_id": 2,
+          "type": "payment",
+          "amount": 2400.0,
+          "prepared_by": "Accounting",
+          "decision": "approved",
+          "decided_by": "V. Woods",
+          "decided_via": "React dashboard → POST /api/approvals/{id}/approve",
+          "payment_id": 2,
+          "payment_kind": "lease_rent"
+        }
+      ],
+      "customer_draft": null,
+      "cash_change": -2400.0,
+      "unresolved_questions": [],
+      "usage": {
+        "requests": 10,
+        "tool_calls": 13,
+        "input_tokens": 16501,
+        "output_tokens": 1990,
+        "delegations": 2,
+        "elapsed_seconds": 21.93
+      }
+    },
+    {
+      "id": 103,
+      "final_status": "resolved",
+      "run_id": "ff6dc368-a578-4f86-a060-108a96b041d4",
+      "agent_run_status": "needs_human_approval",
+      "outcome": "Only 8 of 20 size-M hoodies are in stock (12 short). The team recommended no full-order commitment yet, a human decision on a conditional 10% discount ($52.20 each), and sourcing for the shortage. Customer Service saved an unsent draft. No payment or purchase was requested; the discount decision remains with a person.",
+      "boss_summary": "Started with Inventory because ticket 103 hinges on whether 20 requested hoodies can be fulfilled and whether a bulk price preserves margin. Current records show only 8 of 20 navy medium hoodies in stock. Recommend no full-order commitment yet; seek human decision on a conditional 10% price override and confirm a source for the 12-unit shortfall before any fulfillment promise. Customer Service saved an unsent draft. No vendor or payment action was taken.",
+      "agents": [
+        {
+          "agent": "Boss",
+          "delegated_to": [
+            "Inventory",
+            "Customer Service"
+          ],
+          "mcp_tools": [
+            "get_ticket_context"
+          ],
+          "summary": "Started with Inventory because ticket 103 hinges on whether 20 requested hoodies can be fulfilled and whether a bulk price preserves margin. Current records show only 8 of 20 navy medium hoodies in stock. Recommend no full-order commitment yet; seek human decision on a conditional 10% price override and confirm a source for the 12-unit shortfall before any fulfillment promise. Customer Service saved an unsent draft. No vendor or payment action was taken."
+        },
+        {
+          "agent": "Inventory",
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket_103_bulk_hoodie_stock_and_pricing",
+            "list_vendors",
+            "get_ticket_context"
+          ],
+          "summary": "The 20-unit order cannot be fulfilled from current stock: only 8 navy medium hoodies are on hand, leaving a 12-unit shortage. A 10% discount from list price is financially supportable on the supplied unit cost, but fulfillment depends on finding an eligible source and approval of the price override."
+        },
+        {
+          "agent": "Customer Service",
+          "delegated_to": [],
+          "mcp_tools": [
+            "get_ticket_103_bulk_hoodie_stock_and_pricing",
+            "get_ticket_context",
+            "save_customer_message_draft",
+            "get_pending_approvals"
+          ],
+          "summary": "Saved unsent customer-message draft (draft ID 2). It states that current recorded stock is short of the requested quantity and that the listed price is $58 each; it does not promise restocking or claim vendor action. Any discount requires authorization before it can be offered."
+        }
+      ],
+      "agents_not_involved": [
+        "Accounting",
+        "Facilities"
+      ],
+      "human_approvals": [],
+      "customer_draft": {
+        "draft_id": 2,
+        "status": "draft",
+        "sent": false,
+        "text": "Hi Yale AI Club,\n\nThanks for reaching out about 20 medium navy hoodies and a bulk discount. Our current inventory record shows 8 in stock, so we can’t confirm fulfillment of the full quantity from available stock. Your bulk-discount request has not been approved; the listed price is $58 per hoodie. We’ll need to confirm whether additional units can be sourced and whether any discount can be authorized before confirming an order.\n\nBest,\nCampus Customs"
+      },
+      "cash_change": 0,
+      "unresolved_questions": [
+        "Will a human authorize a 10% discount to $52.20 per hoodie?",
+        "Can an eligible source provide the missing 12 units, at what cost and lead time, and is purchase-order approval available if needed?",
+        "Should the customer be offered the currently available 8 units separately while sourcing for the remaining 12 is investigated?"
+      ],
+      "usage": {
+        "requests": 11,
+        "tool_calls": 14,
+        "input_tokens": 20548,
+        "output_tokens": 3971,
+        "delegations": 2,
+        "elapsed_seconds": 38.6
+      }
+    }
+  ]
+}
